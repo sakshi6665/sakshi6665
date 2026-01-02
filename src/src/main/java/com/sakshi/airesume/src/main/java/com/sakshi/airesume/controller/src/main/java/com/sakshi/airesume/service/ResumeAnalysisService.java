@@ -1,25 +1,44 @@
 package com.sakshi.airesume.service;
 
 import org.springframework.stereotype.Service;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ResumeAnalysisService {
 
-    public String analyze(String resumeText, String jobDescription) {
+    private static final List<String> SKILLS_DB = Arrays.asList(
+            "java", "spring", "sql", "python", "api", "rest", "git", "oop"
+    );
 
-        List<String> skills = Arrays.asList("java", "spring", "sql", "python", "api");
+    public Map<String, Object> analyze(String resumeText, String jobDescription) {
 
-        int matchCount = 0;
-        for (String skill : skills) {
-            if (resumeText.toLowerCase().contains(skill) &&
-                jobDescription.toLowerCase().contains(skill)) {
-                matchCount++;
+        resumeText = resumeText.toLowerCase();
+        jobDescription = jobDescription.toLowerCase();
+
+        List<String> matchedSkills = new ArrayList<>();
+        List<String> missingSkills = new ArrayList<>();
+
+        for (String skill : SKILLS_DB) {
+            boolean inResume = resumeText.contains(skill);
+            boolean inJob = jobDescription.contains(skill);
+
+            if (inResume && inJob) {
+                matchedSkills.add(skill);
+            } else if (!inResume && inJob) {
+                missingSkills.add(skill);
             }
         }
 
-        return "Matched skills count: " + matchCount;
+        int matchPercentage = (int) (
+                (matchedSkills.size() * 100.0) / Math.max(1, missingSkills.size() + matchedSkills.size())
+        );
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("matchPercentage", matchPercentage);
+        result.put("matchedSkills", matchedSkills);
+        result.put("missingSkills", missingSkills);
+        result.put("analysis", "Basic AI-driven skill matching completed");
+
+        return result;
     }
 }
-
