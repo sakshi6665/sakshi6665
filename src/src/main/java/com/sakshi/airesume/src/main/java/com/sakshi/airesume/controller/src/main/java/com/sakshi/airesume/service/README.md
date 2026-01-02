@@ -1,31 +1,32 @@
-# AI Resume Analyzer (Backend Project)
+# AI Resume Analyzer – Java Spring Boot
 
-This project is a backend-focused Spring Boot application that analyzes a candidate’s resume against a job description using AI-inspired logic.
+A backend-focused application that analyzes resumes against job descriptions using AI-inspired logic.
 
-## Objective
-To build a system that can:
-- Extract relevant skills from resume text
-- Match them with job requirements
-- Provide an analysis score and insights
+## What the Project Does
+- Accepts resume text and job description
+- Extracts and matches technical skills
+- Calculates a match percentage
+- Identifies missing skills
+- Provides a foundation for LLM-based analysis
 
-## Current Features
-- REST API built using Spring Boot
-- Controller–Service layered architecture
-- Basic skill extraction and matching logic
-- Foundation for LLM-based resume analysis
+## Backend Architecture
+- REST Controller for API handling
+- Service layer for business logic
+- Clean separation of concerns
 
-## How AI / LLM Fits
-- Current logic uses keyword-based skill matching
-- Future enhancement includes:
-  - NLP-based entity extraction
-  - Prompt-based LLM analysis
-  - Context-aware resume improvement suggestions
+## AI / LLM Approach
+- Current implementation uses rule-based NLP-style matching
+- Designed for future integration with:
+  - Large Language Models
+  - Prompt engineering
+  - Contextual resume feedback generation
 
 ## Tech Stack
 - Java
 - Spring Boot
 - REST APIs
-- AI & LLM Concepts
+- AI & LLM concepts
 
 ## Status
-   Actively under development
+✅ Core backend completed  
+🚀 LLM integration planned
